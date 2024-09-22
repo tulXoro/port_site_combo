@@ -1,0 +1,17 @@
+services:
+  port-app-dev:
+    container_name: port-dev
+    image: port-dev
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+          ignore: 
+            - node_modules
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: "node"
+    ports:
+      - 5173:5173
