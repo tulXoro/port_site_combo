@@ -1,76 +1,92 @@
 <script>
+	import { onMount } from 'svelte';
 
-    const titles = [
-        "Software Developer",
-        "Writer",
-        "Designer",
-        "DevOps Engineer",
-        "Data Scientist"
-    ]
+	const titles = ['Software Developer', 'Writer', 'Designer', 'DevOps Engineer', 'Data Scientist'];
+	const rect = '▍';
 
-    let currentTitle = 0;
+	let currentTitle = 0;
+	let subtitle = '';
+	let blinkingRectangle = rect;
 
-    let subtitle = '';
+	let isTyping = false;
+	/**
+	 * @type {number}
+	 */
+	let typeAnimationFrameId;
+	/**
+	 * @type {number}
+	 */
+	let blinkAnimationFrameId;
+	let lastTimestamp = 0;
 
-    let blinkingRectangle = "▮";
-    let isTyping = false;
+	const updateBlinkingRectangle = (/** @type {number} */ timestamp) => {
+		const blinkSpeed = 500; // milliseconds
+		if (timestamp - lastTimestamp >= blinkSpeed) {
+			if (!isTyping) blinkingRectangle = blinkingRectangle === rect ? '' : rect;
+			else blinkingRectangle = rect;
+			lastTimestamp = timestamp;
+		}
+		blinkAnimationFrameId = requestAnimationFrame(updateBlinkingRectangle);
+	};
 
+	const updateSubtitle = () => {
+		let i = 0;
+		const typingSpeed = 50; // milliseconds
+		const deletingSpeed = 50; // milliseconds
 
-    const updateBlinkingRectangle = () => {
-        if (!isTyping) {
-            blinkingRectangle = blinkingRectangle === "▮" ? "" : "▮";
-        }else{
-            blinkingRectangle = "▮";
-        }
-    }
+		const typeTitle = (/** @type {number} */ timestamp) => {
+			if (timestamp - lastTimestamp >= typingSpeed) {
+				if (i < titles[currentTitle].length) {
+					isTyping = true;
+					subtitle += titles[currentTitle][i];
+					i++;
+					lastTimestamp = timestamp;
+				} else {
+					isTyping = false;
+					cancelAnimationFrame(typeAnimationFrameId);
+					setTimeout(deleteTitle, 2000); // Pause before deleting
+					return;
+				}
+			}
+			typeAnimationFrameId = requestAnimationFrame(typeTitle);
+		};
 
-    // update subtitle by making an animation that looks like typing
-    // and cycle through the titles. pauising at each title for a few seconds
-    const updateSubtitle = () => {
-        let i = 0;
-        let interval = setInterval(() => {
-            // if we haven't finished typing the current title
-            if (i < titles[currentTitle].length) {
-                isTyping = true;
-                subtitle += titles[currentTitle][i];
-                i++;
-            } else {
-                // if we have finished typing the current title
-                clearInterval(interval);
-                // make rectangle blink for a few seconds
-                isTyping = false;
-                // pause for a few seconds
-                setTimeout(() => {
-                    // delete the title
-                    interval = setInterval(() => {
-                        isTyping = true;
-                        if (i > 0) {
-                            subtitle = subtitle.slice(0, -1);
-                            i--;
-                        } else {
-                            clearInterval(interval);
-                            currentTitle = (currentTitle + 1) % titles.length;
-                            
-                            // pause for a few seconds and then start typing the next title
-                            setTimeout(updateSubtitle, 500);
+		const deleteTitle = (/** @type {number} */ timestamp) => {
+			if (timestamp - lastTimestamp >= deletingSpeed) {
+				if (i > 0) {
+					isTyping = true;
+					subtitle = subtitle.slice(0, -1);
+					i--;
+					lastTimestamp = timestamp;
+				} else {
+					isTyping = false;
+					cancelAnimationFrame(typeAnimationFrameId);
+					currentTitle = (currentTitle + 1) % titles.length;
+					setTimeout(updateSubtitle, 1000); // Pause before typing next title
+					return;
+				}
+			}
+			typeAnimationFrameId = requestAnimationFrame(deleteTitle);
+		};
 
-                        }
-                    }, 50);
-                }, 1000);
-                
-            }
-            
-        }, 100);
+		typeAnimationFrameId = requestAnimationFrame(typeTitle);
+	};
 
-    }
-
-    setInterval(updateBlinkingRectangle, 500);
-    updateSubtitle();
-    
-
+	onMount(() => {
+		// Start the subtitle update process
+		updateSubtitle();
+		// Start the blinking cursor animation
+		blinkAnimationFrameId = requestAnimationFrame(updateBlinkingRectangle);
+	});
 </script>
 
-<main>
-    <h1>Timothy Lor</h1>
-    <h2>A <span>{subtitle}</span>{blinkingRectangle}</h2>
+<main class="min-w-full min-h-screen">
+	<div class="w-full h-screen grid items-center font-mono md:px-60">
+		<div>
+			<h1 class="text-9xl font-bold font-mono">Timothy Lor</h1>
+			<h2 class="text-4xl font-bold font-mono mx-20 select-none">
+				A <span>{subtitle}</span>{blinkingRectangle}
+			</h2>
+		</div>
+	</div>
 </main>
