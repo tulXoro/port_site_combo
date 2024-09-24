@@ -81,10 +81,11 @@
 </script>
 
 <main class="min-w-screen min-h-screen">
-	<div class="w-full h-screen grid items-center font-mono px-28 md:px-60">
+	<div class="w-full h-screen grid items-center font-mono px-10 md:px-48">
 		<div>
-			<h1 class="text-2xl text-nowrap md:text-6xl lg:text-9xl md:text-nowrap font-bold font-mono xl:text-start mx-auto md:mx-0">Timothy Lor</h1>
-			<h2 class="text-base text-nowrap md:text-3xl font-bold font-mono md:mx-0 lg:mx-20 select-none">
+			<!-- If there is a problem with mobile view, adjust text size and wrapping -->
+			<h1 class="text-6xl md:text-7xl lg:text-9xl md:text-nowrap font-bold font-mono xl:text-start mx-auto md:mx-0">Timothy Lor</h1>
+			<h2 class="text-2xl text-nowrap md:text-3xl font-bold font-mono md:mx-0 lg:mx-20 select-none">
 				A <span>{subtitle}</span>{blinkingRectangle}
 			</h2>
 		</div>
