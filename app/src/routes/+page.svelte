@@ -1,6 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 
+	import Particles from '$lib/component/main/particles.svelte';
+
 	const titles = ['Software Developer', 'Writer', 'Designer', 'DevOps Engineer', 'Data Scientist'];
 	const rect = '▍';
 
@@ -80,9 +82,9 @@
 	});
 </script>
 
-<main class="min-w-screen min-h-screen bg -z-10">
+<main class="min-w-screen min-h-screen bg -z-30">
 	<div class="mv-grid min-h-screen" />
-
+	<Particles />
 	<div class="gradient" />
 	<div class="w-full h-screen grid items-center font-mono px-10 md:px-48">
 		<div>
@@ -120,7 +122,7 @@
     background-size: 400px 400px; 
     background-position: 0 50px; 
     animation: move 60s linear infinite; 
-    z-index: -2; 
+    z-index: -20; 
 	filter: blur(1.5px); 
 }
 
@@ -133,7 +135,7 @@
     background: linear-gradient(
         180deg,
         rgba(0, 102, 153, 0) 0%,
-        rgba(0, 0, 0, 0.733) 100%
+        rgba(139, 139, 139, 0.055) 100%
     ); 
     z-index: -1; 
 
@@ -148,11 +150,20 @@
     }
 }
 
+@keyframes move-slower {
+    0% {
+        transform: translateX(0); 
+    }
+    100% {
+        transform: translateX(-400px); 
+    }
+}
+
 
 @media (max-width: 768px) {
     .mv-grid {
         background-size: 200px 200px; 
-        animation: move 60s linear infinite;
+        animation: move-slower 30s linear infinite;
     }
 }
 
