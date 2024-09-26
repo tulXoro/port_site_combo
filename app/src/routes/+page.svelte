@@ -80,14 +80,80 @@
 	});
 </script>
 
-<main class="min-w-screen min-h-screen">
+<main class="min-w-screen min-h-screen bg -z-10">
+	<div class="mv-grid min-h-screen" />
+
+	<div class="gradient" />
 	<div class="w-full h-screen grid items-center font-mono px-10 md:px-48">
 		<div>
 			<!-- If there is a problem with mobile view, adjust text size and wrapping -->
-			<h1 class="text-6xl md:text-7xl lg:text-9xl md:text-nowrap font-bold font-mono xl:text-start mx-auto md:mx-0">Timothy Lor</h1>
-			<h2 class="text-2xl text-nowrap md:text-3xl font-bold font-mono md:mx-0 lg:mx-20 select-none">
+			<h1
+				class="text-neutral-50 text-6xl md:text-7xl lg:text-9xl md:text-nowrap font-bold font-mono xl:text-start mx-auto md:mx-0"
+			>
+				Timothy Lor
+			</h1>
+			<h2
+				class="text-neutral-300 text-2xl text-nowrap md:text-3xl font-bold font-mono md:mx-0 lg:mx-20 select-none"
+			>
 				A <span>{subtitle}</span>{blinkingRectangle}
 			</h2>
 		</div>
 	</div>
 </main>
+
+<style>
+.bg {
+    margin: 0;
+    height: 100vh;
+    background: #003366; 
+    overflow: hidden; 
+    position: relative; 
+}
+
+.mv-grid {
+    position: absolute;
+    width: 200%; 
+    height: 100%; 
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 2px, transparent 2px); 
+    background-size: 400px 400px; 
+    background-position: 0 50px; 
+    animation: move 60s linear infinite; 
+    z-index: -2; 
+	filter: blur(1.5px); 
+}
+
+.gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 102, 153, 0) 0%,
+        rgba(0, 0, 0, 0.733) 100%
+    ); 
+    z-index: -1; 
+
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(0); 
+    }
+    100% {
+        transform: translateX(-800px); 
+    }
+}
+
+
+@media (max-width: 768px) {
+    .mv-grid {
+        background-size: 200px 200px; 
+        animation: move 60s linear infinite;
+    }
+}
+
+</style>
