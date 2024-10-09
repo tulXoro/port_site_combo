@@ -1,74 +1,61 @@
 <script>
+	import { Shortcut } from '$lib';
+	import { Window } from '$lib';
 
-    import Shortcut from "../../lib/component/tim-os/shortcut.svelte";
+	let shortcuts = [
+		{ name: 'Terminal' },
+		{ name: 'Resume' },
+		{ name: 'Projects' },
+		{ name: 'Contact' },
+		{ name: 'About' },
+		{ name: 'Blog' },
+		{ name: 'Experience' }
+	];
 
+	/**
+	 * @type {null}
+	 */
+	let window = null;
+
+	/**
+	 * @param {{ detail: { name: any; }; }} e
+	 */
+	function handleOpenWindow(e) {
+		window = e.detail.name;
+		console.log(window);
+	}
+
+    function handleCloseWindow() {
+        window = null;
+    }
 </script>
 
-
 <main class="h-screen w-screen bg-orange-400 top-0">
-    <ul class="grid gap-3 p-4">
-        <li>
-            <Shortcut 
-                name="Terminal"
-            />
-        </li>
+	{#if window}
+		<Window name={window} on:close={ handleCloseWindow } />
+	{/if}
 
-        <li>
-            <Shortcut 
-                name="Resume"
-            />
-        </li>
+	<ul class="grid md:gap-3 p-4 grid-cols-3 gap-4 w-full md:grid-cols-subgrid justify-items-center md:justify-start">
+		{#each shortcuts as shortcut}
+			<li>
+				<Shortcut name={shortcut.name} on:click={handleOpenWindow} />
+			</li>
+		{/each}
+	</ul>
 
-        <li>
-            <Shortcut 
-                name="Projects"
-            />
-        </li>
+	<!-- Taskbar -->
+	<div
+		class="hidden md:flex absolute bottom-0 left-0 h-10 w-full bg-slate-600 items-center justify-between px-4"
+	>
+		<!-- Start Button -->
+		<div class="flex items-center">
+			<button class="bg-blue-500 text-white px-2 py-1 rounded">Start</button>
+		</div>
+		
 
-        <li>
-            <Shortcut 
-                name="Contact"
-            />
-        </li>
-
-        <li>
-            <Shortcut 
-                name="About"
-            />
-        </li>
-
-        <li>
-            <Shortcut 
-                name="Blog"
-            />
-        </li>
-
-        <li>
-            <Shortcut 
-                name="Experience"
-            />
-        </li>
-
-
-    </ul>
-
-    <!-- Taskbar -->
-    <div class="absolute bottom-0 left-0 h-10 w-full bg-slate-600 flex items-center justify-between px-4">
-        <!-- Start Button -->
-        <div class="flex items-center">
-            <button class="bg-blue-500 text-white px-2 py-1 rounded">Start</button>
-        </div>
-        
-        <!-- Quick Launch Icons -->
-        <div class="flex space-x-4">
-            <img src="/icons/icon1.png" alt="Icon" class="h-8 w-8"/>
-            <img src="/icons/icon2.png" alt="Icon" class="h-8 w-8"/>
-            <img src="/icons/icon3.png" alt="Icon" class="h-8 w-8"/>
-        </div>
-        
-        <!-- Clock -->
-        <div class="text-white">
-            {new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")}
-        </div>
-    </div>
+		<!-- Clock -->
+		<div class="text-white">
+			{new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, '$1$3')}
+		</div>
+	</div>
 </main>

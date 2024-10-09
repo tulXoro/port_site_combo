@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import Particles from '$lib/component/main/particles.svelte';
+	import { Particles } from '$lib';
 
 	const titles = ['Software Developer', 'Writer', 'Designer', 'DevOps Engineer', 'Data Scientist'];
 	const rect = '▍';
