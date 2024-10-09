@@ -1,12 +1,8 @@
-<script>
+<script lang='ts'>
 	import { createEventDispatcher } from "svelte";
 
-	export let name = 'null';
+	export let name: string | null = null;
 	export let icon = 'https://via.placeholder.com/50';
-	export let window = 'null';
-
-	export let selected = false;
-	let hovered = false;
 
 	const dispatch = createEventDispatcher();
 

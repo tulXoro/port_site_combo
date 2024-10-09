@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Shortcut } from '$lib';
 	import { Window } from '$lib';
 
@@ -12,15 +12,10 @@
 		{ name: 'Experience' }
 	];
 
-	/**
-	 * @type {null}
-	 */
-	let window = null;
 
-	/**
-	 * @param {{ detail: { name: any; }; }} e
-	 */
-	function handleOpenWindow(e) {
+	let window: string | null = null;
+
+	function handleOpenWindow(e: { detail: { name: any; }; }) {
 		window = e.detail.name;
 		console.log(window);
 	}
