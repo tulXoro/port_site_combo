@@ -1,5 +1,5 @@
 <script lang='ts'>
-    import { onMount, onDestroy } from 'svelte';
+
     import { createEventDispatcher } from "svelte";
 
 	export let name: string | null = null;
@@ -8,22 +8,7 @@
 
     function closeWindow() {
         dispatch('close', { name });
-        history.back();
     }
-
-    onMount(() => {
-        history.pushState({ name }, '', `#${name}`);
-        const handlePopState = (event: PopStateEvent) => {
-            event.preventDefault();
-            closeWindow();
-        };
-
-        window.addEventListener('popstate', handlePopState);
-
-        return () => {
-            window.removeEventListener('popstate', handlePopState);
-        };
-    })
 
 </script>
 
