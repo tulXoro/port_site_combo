@@ -12,25 +12,26 @@
 		{ name: 'Experience' }
 	];
 
-
 	let window: string | null = null;
 
-	function handleOpenWindow(e: { detail: { name: any; }; }) {
+	function handleOpenWindow(e: { detail: { name: any } }) {
 		window = e.detail.name;
 		console.log(window);
 	}
 
-    function handleCloseWindow() {
-        window = null;
-    }
+	function handleCloseWindow() {
+		window = null;
+	}
 </script>
 
 <main class="h-screen w-screen bg-orange-400 top-0">
 	{#if window}
-		<Window name={window} on:close={ handleCloseWindow } />
+		<Window name={window} on:close={handleCloseWindow} />
 	{/if}
 
-	<ul class="grid md:gap-3 p-4 grid-cols-3 gap-4 w-full md:grid-cols-subgrid justify-items-center md:justify-start">
+	<ul
+		class="grid md:gap-3 p-4 grid-cols-3 gap-4 w-full md:grid-cols-subgrid justify-items-center md:justify-start"
+	>
 		{#each shortcuts as shortcut}
 			<li>
 				<Shortcut name={shortcut.name} on:click={handleOpenWindow} />
@@ -46,7 +47,6 @@
 		<div class="flex items-center">
 			<button class="bg-blue-500 text-white px-2 py-1 rounded">Start</button>
 		</div>
-		
 
 		<!-- Clock -->
 		<div class="text-white">

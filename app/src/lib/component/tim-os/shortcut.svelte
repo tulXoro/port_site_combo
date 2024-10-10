@@ -1,6 +1,5 @@
 <script lang='ts'>
 	import { createEventDispatcher } from "svelte";
-
 	export let name: string | null = null;
 	export let icon = 'https://via.placeholder.com/50';
 
