@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
 	import { onMount } from 'svelte';
 
 	import { Particles } from '$lib';
@@ -11,17 +11,12 @@
 	let blinkingRectangle = rect;
 
 	let isTyping = false;
-	/**
-	 * @type {number}
-	 */
-	let typeAnimationFrameId;
-	/**
-	 * @type {number}
-	 */
+	let typeAnimationFrameId: number;
+
 	let blinkAnimationFrameId;
 	let lastTimestamp = 0;
 
-	const updateBlinkingRectangle = (/** @type {number} */ timestamp) => {
+	const updateBlinkingRectangle = (timestamp: number) => {
 		const blinkSpeed = 500; // milliseconds
 		if (timestamp - lastTimestamp >= blinkSpeed) {
 			if (!isTyping) blinkingRectangle = blinkingRectangle === rect ? '' : rect;
@@ -36,7 +31,7 @@
 		const typingSpeed = 50; // milliseconds
 		const deletingSpeed = 50; // milliseconds
 
-		const typeTitle = (/** @type {number} */ timestamp) => {
+		const typeTitle = (timestamp: number) => {
 			if (timestamp - lastTimestamp >= typingSpeed) {
 				if (i < titles[currentTitle].length) {
 					isTyping = true;
@@ -53,7 +48,7 @@
 			typeAnimationFrameId = requestAnimationFrame(typeTitle);
 		};
 
-		const deleteTitle = (/** @type {number} */ timestamp) => {
+		const deleteTitle = (timestamp: number) => {
 			if (timestamp - lastTimestamp >= deletingSpeed) {
 				if (i > 0) {
 					isTyping = true;
