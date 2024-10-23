@@ -18,13 +18,9 @@ RUN npm ci
 # Copy the current directory contents into the container at /app
 COPY . ./
 
-# We need to give the node user permission just in case
-# This takes a long ass time tho so be warned
-RUN chown -R node:node /app
-
 EXPOSE ${PORT}
 
-USER node
+
 
 # Run the app when the container launches
 CMD ["npm", "run", "dev"]
