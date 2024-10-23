@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Shortcut } from '$lib';
-	import { Window } from '$lib';
+	import { Shortcut, Window, Terminal } from '$lib';
 
 	let shortcuts = [
 		{ name: 'Terminal' },
@@ -26,7 +25,11 @@
 
 <main class="h-screen w-screen bg-orange-400 top-0">
 	{#if window}
-		<Window name={window} on:close={handleCloseWindow} />
+		<Window name={window} on:close={handleCloseWindow}>
+			{#if window === 'Terminal'}
+				<Terminal />
+			{/if}
+		</Window>
 	{/if}
 
 	<ul
@@ -53,4 +56,5 @@
 			{new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, '$1$3')}
 		</div>
 	</div>
+
 </main>
