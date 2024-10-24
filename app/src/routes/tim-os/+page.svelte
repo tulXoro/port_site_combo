@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Shortcut, Window, Terminal } from '$lib';
+	import { Shortcut, Window, Terminal, Resume } from '$lib';
 
 	let shortcuts = [
 		{ name: 'Terminal' },
@@ -28,6 +28,8 @@
 		<Window name={window} on:close={handleCloseWindow}>
 			{#if window === 'Terminal'}
 				<Terminal />
+			{:else if window === 'Resume'}
+				<Resume />
 			{/if}
 		</Window>
 	{/if}

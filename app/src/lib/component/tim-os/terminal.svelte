@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { text } from '@sveltejs/kit';
   import { onMount } from 'svelte';
 
   let cmdHistory: string[] = [];
@@ -41,13 +42,6 @@
 		}
 		blinkAnimationFrameId = requestAnimationFrame(updateBlinkingRectangle);
 	};
-
-
-
-
-
-
-
 	
 
 	onMount(() => {
@@ -55,8 +49,36 @@
 		blinkAnimationFrameId = requestAnimationFrame(updateBlinkingRectangle);
 	});
 
+  let textbox: HTMLDivElement;
+
+  function handleFocus(event) {
+    
+    let content = textbox.innerText;
+    textbox.innerText = '';
+    textbox.innerText = content;
+  }
+
+
 </script>
 
-<div>
-  <input type="text" class="bg-black text-white w-full" bind:value={field} /> {blinkingRectangle}
+<div class="flex-row bg-black text-white p-5 hover:cursor-text font-mono h-full" role="button" tabindex="0" on:click={() => textbox.focus()} on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') textbox.focus(); }}>
+
+  <div>
+    <span>Type 'help' for a list of availble commands.</span>
+    {#each cmdHistory as cmd}
+      <div>{cmd}</div>
+    {/each}
+  </div>
+  <div class="">
+    <span>
+      
+    </span>
+    <input type="text" class="bg-black text-white border-none outline-none caret-neutral-50 w-full" bind:value={field} on:keydown={handleKeyDown} bind:this={textbox} />
+    <!-- <div contenteditable="true" class="bg-slate-500 border-none outline-none caret-transparent" on:focus={handleFocus} bind:this={textbox} style="width: {textboxWidth};">
+      {userTyped}
+      <span contenteditable="false" class="select-none">{blinkingRectangle}</span> -->
+    <!-- </div> -->
+
+
+  </div>
 </div>

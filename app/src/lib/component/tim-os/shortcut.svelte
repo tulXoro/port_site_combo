@@ -1,4 +1,5 @@
 <script lang='ts'>
+	// TODO: edit to change focusing
 	import { createEventDispatcher } from "svelte";
 	export let name: string | null = null;
 	export let icon = 'https://via.placeholder.com/50';
