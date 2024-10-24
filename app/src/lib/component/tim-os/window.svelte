@@ -9,7 +9,7 @@
 	}
 </script>
 
-<div class="bg-gray-800 absolute z-100 left-1/2 transform -translate-x-1/2 mt-10 md:w-10/12 md:h-5/6 w-10/12 h-5/6">
+<div class="bg-gray-800 absolute z-100 left-1/2 transform -translate-x-1/2 mt-10 md:w-10/12 w-10/12 h-5/6 flex flex-col">
 	<!-- Top bar -->
 	<div class="flex justify-between items-center p-4">
 		<div class="flex items-center space-x-4 w-full">
@@ -23,5 +23,8 @@
 		</div>
 	</div>
 
-	<slot />
+	<div class="flex-grow h-0 overflow-y-scroll">
+		<slot/>
+	</div>
+
 </div>
