@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { text } from '@sveltejs/kit';
-	import { onMount } from 'svelte';
 
-	let cmdHistory: string[] = ["A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","AA","BB","CC","DD","EE","FF","GG","HH","II","JJ","KK","LL","MM","NN","OO","PP","QQ","RR","SS","TT","UU","VV","WW","XX","YY","ZZ","AAA","BBB","CCC","DDD","EEE","FFF","GGG","HHH","III"];
+	let cmdHistory: string[] = [];
 	let field: string = '';
 
 	let userTyped: string = '';
@@ -17,44 +15,30 @@
 			case 'Backspace':
 				userTyped = userTyped.slice(0, -1);
 				break;
-
+      case 'Enter':
+				handleSend();
+        break;
+      
 			default:
+      const isAlphanumeric = e.code.startsWith('Key') || e.code.startsWith('Digit');
+      if (isAlphanumeric)
 				userTyped += key;
-				break;
+
+			break;
 		}
 	};
 
-	const rect = '▍';
-
-	let blinkingRectangle = rect;
-
-	let isTyping = false;
-
-	let blinkAnimationFrameId;
-	let lastTimestamp = 0;
-
-	const updateBlinkingRectangle = (timestamp: number) => {
-		const blinkSpeed = 500; // milliseconds
-		if (timestamp - lastTimestamp >= blinkSpeed) {
-			if (!isTyping) blinkingRectangle = blinkingRectangle === rect ? '' : rect;
-			else blinkingRectangle = rect;
-			lastTimestamp = timestamp;
-		}
-		blinkAnimationFrameId = requestAnimationFrame(updateBlinkingRectangle);
-	};
-
-	onMount(() => {
-		// Start the blinking cursor animation
-		blinkAnimationFrameId = requestAnimationFrame(updateBlinkingRectangle);
-	});
-
-	let textbox: HTMLDivElement;
-
-	function handleFocus(event) {
-		let content = textbox.innerText;
-		textbox.innerText = '';
-		textbox.innerText = content;
+	const handleSend = () => {
+		if (userTyped === '') return;
+		cmdHistory = [...cmdHistory, "> "+userTyped];
+        field = '';
+        userTyped = '';
 	}
+
+
+
+
+
 </script>
 
 <div class="flex flex-col text-white font-mono h-full">
@@ -64,17 +48,18 @@
 			<div>{cmd}</div>
 		{/each}
 	</div>
-	<div class="inline-flex pl-3 bg-black">
+	<div class="inline-flex pl-3 bg-black border-zinc-800 border-2">
 		<label for="prompt" class="mr-1">
-			<span>user@website:~$</span>
+			<span class="mr-1">></span>
 		</label>
 		<input
 			id="prompt"
 			type="text"
-			class="bg-black text-white border-none outline-none caret-neutral-50 w-full pb-1"
+			class="bg-black text-white border-none outline-none caret-neutral-50 w-full pb-1 "
 			bind:value={field}
 			on:keydown={handleKeyDown}
-			bind:this={textbox}
+
 		/>
+		<button class="bg-slate-500" on:click={handleSend} >SEND</button>
 	</div>
 </div>
