@@ -36,9 +36,6 @@
 	}
 
 
-
-
-
 </script>
 
 <div class="flex flex-col text-white font-mono h-full">

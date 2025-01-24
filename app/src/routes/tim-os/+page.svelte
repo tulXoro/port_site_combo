@@ -55,6 +55,7 @@
 
 		<!-- Clock -->
 		<div class="text-white">
+			<!-- TODO: make date responsive -->
 			{new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, '$1$3')}
 		</div>
 	</div>
