@@ -3,6 +3,8 @@
 
 	import { Particles } from '$lib';
 
+	import Navbar from '$lib/component/main/navbar.svelte'
+
 	const titles = ['Software Developer', 'Writer', 'Designer', 'DevOps Engineer', 'Data Scientist'];
 	const rect = '▍';
 
@@ -96,6 +98,7 @@
 			</h2>
 		</div>
 	</div>
+	<Navbar />
 </main>
 
 <style>

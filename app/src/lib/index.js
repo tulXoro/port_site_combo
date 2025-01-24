@@ -5,5 +5,6 @@ import Shortcut from './component/tim-os/shortcut.svelte';
 import Window from './component/tim-os/window.svelte';
 import Terminal from './component/tim-os/terminal.svelte';
 import Resume from './component/tim-os/resume.svelte';
+import Navbar from './component/main/navbar.svelte';
 
-export { ProjectCard, Particles, Shortcut, Window, Terminal, Resume };
+export { ProjectCard, Particles, Shortcut, Window, Terminal, Resume, Navbar };

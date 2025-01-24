@@ -13,7 +13,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the dependencies
-RUN npm ci
+RUN npm ci -force
 
 # Copy the current directory contents into the container at /app
 COPY . ./
