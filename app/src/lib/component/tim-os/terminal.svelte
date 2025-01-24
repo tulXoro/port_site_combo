@@ -1,7 +1,7 @@
 <script lang="ts">
 
-	let cmdHistory: string[] = [];
-	let field: string = '';
+	let cmdHistory: string[] = $state([]);
+	let field: string = $state('');
 
 	let userTyped: string = '';
 
@@ -54,9 +54,9 @@
 			type="text"
 			class="bg-black text-white border-none outline-none caret-neutral-50 w-full pb-1 "
 			bind:value={field}
-			on:keydown={handleKeyDown}
+			onkeydown={handleKeyDown}
 
 		/>
-		<button class="bg-slate-500" on:click={handleSend} >SEND</button>
+		<button class="bg-slate-500" onclick={handleSend} >SEND</button>
 	</div>
 </div>

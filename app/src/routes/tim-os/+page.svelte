@@ -11,7 +11,7 @@
 		{ name: 'Experience' }
 	];
 
-	let window: string | null = null;
+	let window: string | null = $state(null);
 
 	function handleOpenWindow(e: { detail: { name: any } }) {
 		window = e.detail.name;

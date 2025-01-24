@@ -1,7 +1,7 @@
 <script>
   import { Card, Button, Toggle } from 'flowbite-svelte';
   import { ArrowRightOutline } from 'flowbite-svelte-icons';
-  let vCard = false;
+  let vCard = $state(false);
 </script>
 
 <div  class="space-y-4">

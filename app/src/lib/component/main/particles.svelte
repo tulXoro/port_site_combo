@@ -6,7 +6,7 @@
 	/**
 	 * @type {typeof import("@tsparticles/svelte").default}
 	 */
-	let ParticlesComponent;
+	let ParticlesComponent = $state();
 
 	onMount(async () => {
 		const module = await import('@tsparticles/svelte');
@@ -95,8 +95,7 @@
 	};
 </script>
 
-<svelte:component
-	this={ParticlesComponent}
+<ParticlesComponent
 	id="tsparticles"
 	class="-z-10 absolute top-0 left-0 w-full h-full pointer-events-auto"
 	style=""

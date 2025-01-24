@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	export let name: string | null = null;
+	interface Props {
+		name?: string | null;
+		children?: import('svelte').Snippet;
+	}
+
+	let { name = null, children }: Props = $props();
 
 	const dispatch = createEventDispatcher();
 
@@ -13,18 +18,18 @@
 	<!-- Top bar -->
 	<div class="flex justify-between items-center p-4">
 		<div class="flex items-center space-x-4 w-full">
-			<button class="bg-red-500 h-3 w-4 rounded-full hover:bg-red-300" on:click={closeWindow} />
+			<button class="bg-red-500 h-3 w-4 rounded-full hover:bg-red-300" onclick={closeWindow}></button>
 			<button
 				class="bg-yellow-500 h-3 w-4 rounded-full hover:bg-yellow-300"
-				on:click={closeWindow}
-			/>
-			<button class="bg-green-500 h-3 w-4 rounded-full hover:bg-green-300" on:click={closeWindow} />
+				onclick={closeWindow}
+			></button>
+			<button class="bg-green-500 h-3 w-4 rounded-full hover:bg-green-300" onclick={closeWindow}></button>
 			<span class="text-neutral-50 text-center select-none w-full">{name}</span>
 		</div>
 	</div>
 
 	<div class="flex-grow h-0 overflow-y-scroll">
-		<slot/>
+		{@render children?.()}
 	</div>
 
 </div>

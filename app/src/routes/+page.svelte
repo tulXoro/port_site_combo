@@ -7,8 +7,8 @@
 	const rect = '▍';
 
 	let currentTitle = 0;
-	let subtitle = '';
-	let blinkingRectangle = rect;
+	let subtitle = $state('');
+	let blinkingRectangle = $state(rect);
 
 	let isTyping = false;
 	let typeAnimationFrameId: number;
@@ -78,9 +78,9 @@
 </script>
 
 <main class="min-w-screen min-h-screen bg -z-30">
-	<div class="mv-grid min-h-screen" />
+	<div class="mv-grid min-h-screen"></div>
 	<Particles />
-	<div class="gradient" />
+	<div class="gradient"></div>
 	<div class="w-full h-screen grid items-center font-mono px-10 md:px-48">
 		<div>
 			<!-- If there is a problem with mobile view, adjust text size and wrapping -->
