@@ -81,7 +81,7 @@
 
 <main class="min-w-screen min-h-screen bg -z-30">
 	<div class="mv-grid min-h-screen"></div>
-	<Particles />
+	<!-- <Particles /> -->
 	<div class="gradient"></div>
 	<div class="w-full h-screen grid items-center font-mono px-10 md:px-48">
 		<div>
@@ -99,6 +99,7 @@
 		</div>
 	</div>
 	<Navbar />
+
 </main>
 
 <style>
