@@ -79,10 +79,9 @@
 	});
 </script>
 
-<main class="min-w-screen min-h-screen bg -z-30">
-	<div class="mv-grid min-h-screen"></div>
-	<!-- <Particles /> -->
-	<div class="gradient"></div>
+<main class="min-w-screen min-h-screen max-h-screen m-0 overflow-hidden relative">
+
+
 	<div class="w-full h-screen grid items-center font-mono px-10 md:px-48">
 		<div>
 			<!-- If there is a problem with mobile view, adjust text size and wrapping -->
@@ -97,6 +96,22 @@
 				A <span>{subtitle}</span>{blinkingRectangle}
 			</h2>
 		</div>
+
+		<div class='justify-self-end'>
+			<a href='./tim-os' class=" z-auto bg-neutral-50 text-neutral-900 font-bold text-2xl md:text-3xl px-6 py-3 rounded-lg mt-10 md:mt-20 hover:bg-neutral-900 hover:text-neutral-50">
+				<span>
+					Enter Site!
+				</span>
+			</a>
+		</div>
+
+		<div class="mv-grid min-h-screen -z-10 absolute h-screen"></div>
+		<!-- <Particles /> -->
+		<div class="gradient top-0 left-0 w-screen h-screen absolute -z-10"></div>
+
+		<div class='bg w-full h-full absolute top-0 left-0 -z-20'>
+
+		</div>
 	</div>
 	<Navbar />
 
@@ -104,45 +119,34 @@
 
 <style>
 .bg {
-    margin: 0;
-    height: 100vh;
     background: #003366; 
-    overflow: hidden; 
-    position: relative; 
 }
 
 .mv-grid {
-    position: absolute;
     width: 200%; 
-    height: 100%; 
     background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 2px, transparent 2px); 
     background-size: 400px 400px; 
     background-position: 0 50px; 
     animation: move 60s linear infinite; 
-    z-index: -20; 
 	filter: blur(1.5px); 
 }
 
 .gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+
     background: linear-gradient(
         180deg,
         rgba(0, 102, 153, 0) 0%,
         rgba(139, 139, 139, 0.055) 100%
     ); 
-    z-index: -1; 
+
 
 }
 
 @keyframes move {
     0% {
-        transform: translateX(0); 
+        transform: translateX(0px); 
     }
     100% {
         transform: translateX(-800px); 
@@ -151,7 +155,7 @@
 
 @keyframes move-slower {
     0% {
-        transform: translateX(0); 
+        transform: translateX(400px); 
     }
     100% {
         transform: translateX(-400px); 
